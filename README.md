@@ -22,7 +22,7 @@ A faster drop-in for make.fun's own makefun-site 1.0.0: `solve.js` answers exact
 ## Reasoning (why this version)
 
 - **Gate first**: every deviation from makefun-site's dialect fails the entry, so the build is a from-scratch reimplementation verified against the reference on the practice set *and* on freshly generated instances — not a tuned copy of the baseline.
-- **Speed vs the live cutoff**: the practice leaderboard's rank-10 cutoff sits at 790,000 µs with rank 1 at 380,000 µs; a ~2.5× speedup over the house baseline puts this probe near the rank-10 cutoff, not comfortably inside it — it is a probe to bank a passing entry, and a faster probe 2 is possible if the headroom work (deeper template inlining, fewer allocations in the Markdown pass) pays off.
+- **Speed vs the live cutoff**: the live leaderboard's rank-10 cutoff has compressed to 110,000 µs with rank 1 at 20,000 µs (checked 23 Nov, ~17:15 WIB; at build time the cutoff was still 790,000 µs). A ~2.5× speedup over the house baseline plausibly lands this probe above today's cutoff — it is submitted as a probe to bank a gate-passing entry that beats the baseline and to measure the real dev cpu_us; a faster probe 2 (deeper template inlining, fewer allocations in the Markdown pass) is possible if that headroom work pays off before entries close.
 - **Weakness**: the entry is tuned against the practice set's shapes (template set, content mix); the scored set is drawn from a different drand round, so an unseen template construct or content edge could cost the gate — mitigated by the fresh-instance checks above and by keeping every semantic rule a direct transcription of the reference code rather than a shortcut.
 
 ## Run it
